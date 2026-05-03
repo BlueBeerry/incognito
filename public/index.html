@@ -794,7 +794,7 @@ function setError(msg) {
 
 function createLobby() {
   const username = getUsername();
-  if (!username) return setError('Enter a username first.');
+  if (!username) return setError('Mets un pseudo dabord golmon');
   myUsername = username;
   socket.emit('create_lobby', { username }, (res) => {
     if (res.error) return setError(res.error);
@@ -807,8 +807,8 @@ function createLobby() {
 function joinLobby() {
   const username = getUsername();
   const code = document.getElementById('input-code').value.trim().toUpperCase();
-  if (!username) return setError('Enter a username first.');
-  if (!code) return setError('Enter a lobby code.');
+  if (!username) return setError('Mets un pseudo dabord golmon');
+  if (!code) return setError('Faut mettre un code de lobby je crois');
   myUsername = username;
   socket.emit('join_lobby', { username, code }, (res) => {
     if (res.error) return setError(res.error);
@@ -845,7 +845,7 @@ socket.on('lobby_state', (state) => {
   if (isMaster) {
     btnStart.style.display = 'block';
     settingQCount.style.display = 'flex';
-    hint.textContent = `${state.players.length} player${state.players.length !== 1 ? 's' : ''} dans le lobby — commences quand tu veux.`;
+    hint.textContent = `${state.players.length} joueur${state.players.length !== 1 ? 's' : ''} dans le lobby — commences quand tu veux.`;
   } else {
     btnStart.style.display = 'none';
     settingQCount.style.display = 'none';

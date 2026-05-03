@@ -66,6 +66,15 @@ const IDENTITIES = [
   { name: "Dano",      avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500585326110970037/363012549_10230815780888488_896101427181862810_n.png?ex=69f8f87d&is=69f7a6fd&hm=343044cece8e3634c14c83975b83b030e4252734ab2429ca97234661720e493d&"   },
   { name: "Walter",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500585587051200626/8Ze_xyag8md_Ru4BNqHfSc-H81xpBi5SbxZp0T3BT95ddp05qOdW7dzDh-ZVsqXvGeRMXQpM1Rn8xa8nf7sEBIPB.jpg?ex=69f8f8bb&is=69f7a73b&hm=4c8c44b0fb261b29582d3e167e44ff7cd4cb755808c3edef672a4a572778b91f&"   },
   { name: "KebabMan",  avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1339897573825052673/kebab-machine-he-doesnt-look-as-good-as-i-thought-he-will-v0-fxddt6gynrnd1.jpg?ex=69f86cdb&is=69f71b5b&hm=6cc49a7213d762f875d658057380ca657c75bb2ff07d92ed351ec3816672fb4d&"    },
+
+  { name: "Mustapha Atatürk",   avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500605862132187219/what-skins-do-you-guys-think-homelander-will-have-v0-u8fxco5nfzsb1.png?ex=69f90b9d&is=69f7ba1d&hm=7f59e8aade6c99aa4d0da68111968565c9526f46e8f0bfe50f19f605a570d5f8&"   },
+  { name: "Kratos Messi",  avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500606165665710220/kratosmessi-kratos.png?ex=69f90be5&is=69f7ba65&hm=62f0ea2c5a9bd3182405279f81b6a0678e9c6402fedc5d78d2c108dd644f9a35&"       },
+  { name: "Sale Juif",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500606473733148783/GAD_ELMALEH_20240771R2-copie2.png?ex=69f90c2f&is=69f7baaf&hm=23f578379832793614ffe0bc02b36feeddc3a9f27b696d831a2386e464b48fa8&"    },
+  { name: "René la taupe",  avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500606637965185024/vente_peluche-rene-la-taupe--23-cm-jemini-14188.png?ex=69f90c56&is=69f7bad6&hm=66823f1eb0cabfaabeb543fcc9d95667ff1cf92180add8767de9bc687daa7c5d&"  },
+  { name: "Jorblin Jeapnis",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500606900385874000/GK1CR6kXgAAhU-u.png?ex=69f90c94&is=69f7bb14&hm=3526b6bcdb21e4dc8bf20ef8ad177cc9d1261b32e8d3f81302cbdf84fb28775a&"    },
+  { name: "Sigma Ronaldo",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500607248248864899/images_6.jpeg?ex=69f90ce7&is=69f7bb67&hm=22eab3678bc814a46a9d42e61c75cc9225234f7ea5b9407365a4687f1a3162e9&"    },
+  { name: "Mloukhia",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500607634699583609/grossiste-amilcar-mloukhia-tunisie_MLO2K350.png?ex=69f90d44&is=69f7bbc4&hm=62b331e0ade94477cabe25bb25cf1c9b262cee99b492f256bca4e29feaa2715e&"   },
+  { name: "LSD",      avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500608184518312076/Screenshot_20260113_074313_TikTok.jpg?ex=69f90dc7&is=69f7bc47&hm=ab045a0a5cffc3dc432e1da5db0db014c0312f038e67585d151101923ca95dbb&"   },
 ];
 
 // ─── State ───────────────────────────────────────────────────────────────────
