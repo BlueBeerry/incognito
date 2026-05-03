@@ -56,16 +56,16 @@ if (fs.existsSync(questionsFile)) {
 
 // ─── Identities ─────────────────────────────────────────────────────────────
 const IDENTITIES = [
-  { name: "Maurice",   avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Maurice&backgroundColor=b6e3f4"   },
-  { name: "Léo",       avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Leo&backgroundColor=ffdfbf"       },
-  { name: "Adrien",    avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Adrien&backgroundColor=c0aede"    },
-  { name: "Jean-Paul", avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=JeanPaul&backgroundColor=d1f4d1"  },
-  { name: "Robert",    avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Robert&backgroundColor=ffd6e0"    },
-  { name: "Gérard",    avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Gerard&backgroundColor=ffe0b2"    },
-  { name: "Fernand",   avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Fernand&backgroundColor=e0f7fa"   },
-  { name: "Lucette",   avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Lucette&backgroundColor=fce4ec"   },
-  { name: "Monique",   avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Monique&backgroundColor=f3e5f5"   },
-  { name: "Yvette",    avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Yvette&backgroundColor=e8f5e9"    },
+  { name: "Hérvé",     avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500575722148987031/Screenshot_20260330_182917_TikTok.jpg?ex=69f8ef8b&is=69f79e0b&hm=e04eadfbf5f3930dd6ef6598a862eb4dc07b48c2feb2b380abe1d771c5d0f44d&"   },
+  { name: "Marzouka",  avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500582792390774885/images_5.png?ex=69f8f621&is=69f7a4a1&hm=6f094311cfd846629e6782f5f578f25097dd9b8fa2a03df46e8ccd2d8b458c3c&"       },
+  { name: "Bassem",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500582901266387035/ab67616d0000b2739bbe733b8e89b0012740b69b.png?ex=69f8f63b&is=69f7a4bb&hm=dd8efc9997a78c78103cc8b7d2f28a3204e23a1e69e751dff42ae56fad8254ba&"    },
+  { name: "Asterion",  avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500583583222595714/OcaRfoTCWk2O4DmXjFA8Sct8hwTzMpkGxC8OwIssmB5zGjiSO6CsD0Ru0NYzlzdaGJZNLGhls900-c-k-c0x00ffffff-no-rj.png?ex=69f8f6dd&is=69f7a55d&hm=042a72735e70f6d8008e741e6388344ce8ad7a3c617033b07aeef3438c172a0c&"  },
+  { name: "Mobutu",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500583987842777219/Mobutu.png?ex=69f8f73e&is=69f7a5be&hm=7fe2dd0b04bf2a578cebac1d162a00987d8142d695b66b872e6ad4b96a89b93d&"    },
+  { name: "IbraTV",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500584618414571641/ibra-tv-mma-2.png?ex=69f8f7d4&is=69f7a654&hm=f0b8beb95bd2cae694e641e98e7c34b6f96b6ebfe0feda2e691c680c7d061902&"    },
+  { name: "Yassin",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500585048410161296/IMG_1351.png?ex=69f8f83b&is=69f7a6bb&hm=b57fa184a3e8ed98783fa2bdf9432319b75f518746be3e016a238648d6d61b27&"   },
+  { name: "Dano",      avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500585326110970037/363012549_10230815780888488_896101427181862810_n.png?ex=69f8f87d&is=69f7a6fd&hm=343044cece8e3634c14c83975b83b030e4252734ab2429ca97234661720e493d&"   },
+  { name: "Walter",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500585587051200626/8Ze_xyag8md_Ru4BNqHfSc-H81xpBi5SbxZp0T3BT95ddp05qOdW7dzDh-ZVsqXvGeRMXQpM1Rn8xa8nf7sEBIPB.jpg?ex=69f8f8bb&is=69f7a73b&hm=4c8c44b0fb261b29582d3e167e44ff7cd4cb755808c3edef672a4a572778b91f&"   },
+  { name: "KebabMan",  avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1339897573825052673/kebab-machine-he-doesnt-look-as-good-as-i-thought-he-will-v0-fxddt6gynrnd1.jpg?ex=69f86cdb&is=69f71b5b&hm=6cc49a7213d762f875d658057380ca657c75bb2ff07d92ed351ec3816672fb4d&"    },
 ];
 
 // ─── State ───────────────────────────────────────────────────────────────────

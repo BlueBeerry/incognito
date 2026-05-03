@@ -747,7 +747,7 @@ body::before {
 <section id="screen-results" class="screen">
   <div class="results-header">
     <h2>Revelation !</h2>
-    <p>Enfin la verité si je peu me permettre/p>
+    <p>Enfin la verité si je peu me permettre</p>
   </div>
 
   <div class="reveal-grid" id="reveal-grid"></div>
@@ -834,7 +834,7 @@ socket.on('lobby_state', (state) => {
     el.innerHTML = `
       <div class="dot"></div>
       ${p.isMaster ? '<span class="crown">♛</span>' : ''}
-      <span>${p.username}${p.id === socket.id ? ' <span style="color:var(--muted);font-size:10px">(you)</span>' : ''}</span>
+      <span>${p.username}${p.id === socket.id ? ' <span style="color:var(--muted);font-size:10px">(toi)</span>' : ''}</span>
     `;
     list.appendChild(el);
   });
@@ -845,18 +845,18 @@ socket.on('lobby_state', (state) => {
   if (isMaster) {
     btnStart.style.display = 'block';
     settingQCount.style.display = 'flex';
-    hint.textContent = `${state.players.length} player${state.players.length !== 1 ? 's' : ''} in lobby — start when ready.`;
+    hint.textContent = `${state.players.length} player${state.players.length !== 1 ? 's' : ''} dans le lobby — commences quand tu veux.`;
   } else {
     btnStart.style.display = 'none';
     settingQCount.style.display = 'none';
-    hint.textContent = 'Waiting for the game master to start…';
+    hint.textContent = 'On attend que ça commence mdrrrrrr';
   }
 });
 
 socket.on('you_are_master', () => {
   isMaster = true;
   document.getElementById('btn-start').style.display = 'block';
-  document.getElementById('lobby-hint').textContent = 'You are now the game master.';
+  document.getElementById('lobby-hint').textContent = 'Tes le boss maintenant';
 });
 
 function startGame() {
@@ -982,7 +982,7 @@ function buildMatchingUI() {
       <img src="${identity.avatar}" alt="${identity.fakeName}"/>
       <div>
         <div class="id-name">${identity.fakeName}</div>
-        <div class="id-guess" id="guess-${identity.fakeName}">— not assigned —</div>
+        <div class="id-guess" id="guess-${identity.fakeName}">— pas assigné —</div>
       </div>
     `;
     // drag-over events
@@ -1043,7 +1043,7 @@ function assignGuess(fakeName, username) {
     if (un === username) {
       delete guesses[fn];
       const el = document.getElementById('guess-' + fn);
-      if (el) el.textContent = '— not assigned —';
+      if (el) el.textContent = '— pas assigné —';
       // un-used the chip
       const chip = document.querySelector(`.username-chip[data-username="${username}"]`);
       if (chip) chip.classList.remove('used');
@@ -1067,13 +1067,13 @@ function assignGuess(fakeName, username) {
 
 socket.on('matching_progress', ({ submitted, total }) => {
   document.getElementById('matching-progress').textContent =
-    `${submitted} / ${total} players have submitted`;
+    `${submitted} / ${total} joueurs on soumis`;
 });
 
 function submitMatching() {
   socket.emit('submit_matching', { guesses });
   document.getElementById('btn-submit-matching').style.display = 'none';
-  document.getElementById('matching-progress').textContent = 'Waiting for other players…';
+  document.getElementById('matching-progress').textContent = 'On attend les autres';
 }
 
 // ─── Results ──────────────────────────────────────────────────────────────────
@@ -1087,7 +1087,7 @@ socket.on('results', ({ truth, leaderboard, identities }) => {
     const myGuess = guesses[item.fakeName];
     const correct = myGuess === item.username;
     const card = document.createElement('div');
-    card.className = 'reveal-card' + (myGuess ? (correct ? ' correct' : ' wrong') : '');
+    card.className = 'reveal-card' + (myGuess ? (correct ? ' correcte' : ' faux') : '');
     card.style.animationDelay = (i * 0.07) + 's';
     card.innerHTML = `
       <img src="${item.avatar}" alt="${item.fakeName}"/>
@@ -1107,7 +1107,7 @@ socket.on('results', ({ truth, leaderboard, identities }) => {
     row.style.animationDelay = (i * 0.06) + 's';
     row.innerHTML = `
       <div class="lb-rank">${i + 1}</div>
-      <div class="lb-name">${entry.username}${entry.username === myUsername ? ' <span style="color:var(--muted);font-size:10px">(you)</span>' : ''}</div>
+      <div class="lb-name">${entry.username}${entry.username === myUsername ? ' <span style="color:var(--muted);font-size:10px">(toi)</span>' : ''}</div>
       <div class="lb-pts">${entry.points}</div>
     `;
     lb.appendChild(row);

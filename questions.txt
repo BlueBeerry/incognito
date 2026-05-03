@@ -1,41 +1,80 @@
-Tu preferes le café ou les noirs ?
-What's your favourite season?
-Are you more of a morning person or a night owl?
-What's the last show you binge-watched?
-What's your comfort food?
-Do you have any pets?
-What's your go-to karaoke song?
-Beach or mountains?
-What superpower would you choose?
-What's the worst movie you've ever seen?
-What's something you're secretly good at?
-Would you rather explore space or the deep ocean?
-What's the weirdest food you've ever tried?
-Who was your childhood hero?
-What's your biggest irrational fear?
-What would your autobiography be titled?
-What emoji describes you best?
-Do you believe in ghosts?
-What's a skill you wish you had?
-What was your first job?
-What's the most useless talent you have?
-Would you rather always be too hot or too cold?
-What game show would you crush it on?
-What's something everyone else likes that you hate?
-If you could eat one meal forever, what would it be?
-What's the bravest thing you've ever done?
-What's a dealbreaker in a friendship?
-What's your most controversial opinion?
-What's the most embarrassing thing you own?
-What's one thing you'd tell your 10-year-old self?
-What's the last thing you googled?
-Do you have any hidden talents?
-What's your most used app?
-What's the weirdest dream you've had?
-Would you survive a zombie apocalypse?
-What's your love language?
-Do you talk to yourself?
-What's a movie that made you cry?
-What's something you've never told anyone?
-Cats or dogs?
-
+C'est quoi ton jeux video préféré ?
+C'est quoi ton film préféré ?
+C'est quoi ton plat préféré ?
+C'est quoi ton livre préféré ?
+C'est quoi ton anime/manga préféré ?
+C'est qui ton chanteur préféré ?
+C'est quoi ton mot préféré ?
+C'est quoi ta série préféré ?
+C'est qui ton youtubeur / streamer préféré ?
+Faudrait qu'on te paye combien pour jouer a LoL ?
+T'es une soumise sur Valo ou pas ?
+Si tu pouvais avoir un fruit du démon de One Piece, ce serait lequel ? (ex: fruit du caca mdrrr)
+C'est quoi ton type de bois préféré sur Minecraft mon petit pgm ?
+Si tu pouvais etre invité sur un concepte de youtubeur (ex : devine la biere de mcfly et carlito), ça serait lequel ?
+Si tu pouvais avoir un super pouvoir ça serait lequel ?
+Si tu pouvais gifler un mec par bluetooth n'importe ou sur terre ça serait qui ?
+Si tu pouvais créer un portail d'un point A à un point B permanent, ça serait de ou à ou ?
+Est ce que tu penses être le plus beau du lobby ?
+Tu prends qui du lobby à la bagarre ?
+Si tu pouvais flinguer un mec du lobby ça serait qui ?
+Ton type de meuf la maintenant c'est quoi ?
+Si tu pouvais ramener une meuf d'anime dans la vrais vie pour que ça sois ta dulciné tu prend qui ?
+De tout les mec du lobby, lequel est la plus grosse victime ?
+Si tu pouvais obtenir un objet de la fiction (film, jeux video etc), tu prendrais quoi ?
+Si tu devais te decrire en terme d'arme fortnite, tu serais quoi ? (ex : le createur du jeux est un minigune mythique de brutus)
+Pour combien tu suces une enormes queue ? (21 centimetres dans le gosier)
+Dans quelle pays tu n'iras jamais ?
+Dans quelle pays tu voudrais vivre la vida loca ?
+Quelle est ta marque de sappe préféré ?
+C'est quoi ton album préféré ?
+Michael Jackson etait-il coupable ?
+Si tu devais marrier un mec du lobby à vie, tu prends qui ?
+Pourrais tu pacter avec iblis pour vivre la vie avec un grand v ? 
+Si tu pouvais masteriser un skill d'un claquement de doigts, tu prendrais quoi ? (ex : la boxe)
+Si tu ne pouvais bouffer qu'un truc jusqu'a la fin de ta miserable vie ça serait quoi ?
+Tu preferes etre un juif en 35 ou un negre pendant le commerce triangulaire ?
+Cite moi un mec qui est secretement pedophile (ex : Pierre Croce)
+Messi ou Ronaldo ?
+Si tu pouvais racheter une entreprise gratuitement, tu prends laquelle ?
+Si tu devais te suicider tu le ferais comment ? (ex : 15 dolipranes)
+C'est quoi le dernier truc qui t'as fais peur ?
+Si tu pouvais vendre un centimetre de zboub pour 10k, combien de centimetre tu pourrais vendre ?
+Si tu devais faire un tattouage, ça serait quoi ?
+Combien de jours max tu t'es pas laver ?
+Mimi Mathy te pousse dans la queue du super U, tu fais quoi ?
+Qui est pour toi la plus belle femme du monde ?
+C'est qui le plus moche du lobby ?
+C'est quoi ton sport fav ma viiiiieeee ?
+Si tu pouvais prendre trois objet avec toi sur une ile deserte, ça serais quoi ?
+La douche c'est le matin ou le soirs (ou pas pour Yassin Romdhani) ?
+Si tu reçevais 500k la maintenant tu ferais quoi avec ?
+Tu es enfermé pendant 100 jours dans une salle avec un mec qui a une grosse queue, il se passe quoi le 58eme jours ?
+Dans les années 40, aurais tu dennoncer ton amis juif pour quelque écus ?
+Un bébé pleure dans ton train / avion depuis 4 heures, comment tu réagis ?
+As tu un fantasme / kink ?
+Qui est la plus grosse fraude d'internet ?
+Quelle personnage (de n'importe quelle media) te represente le plus ?
+La derniere fois que t'as pleurer c'etait pour quoi ?
+Quelle rôle d'acteur est le mieux fait pour vous et pourquoi ? (ex : le mec dans the whale parce que je suis obese)
+Quelle est la premiere chose que tu regardes chez une femme ?
+C'est quoi le metier de tes reves quand tu etais tipeu petit tipeu ?
+C'est quoi ton plus gros défaut physique ?
+5 nains t'encercle  pour te mogu comment tu te defends ?
+Si tu devais pedre un sens, lequel ce serait ?
+Quel prénom aurais tu aimer avoir ?
+Faudrait te payer combien pour etre invité dans une video d'hugo posay ?
+Quelle est le pire pseudo que tu as utiliser sur un site / jeux ?
+On t'offre une chirurgie esthetique pour une partie du corps, laquelle ?
+Si il y a une apocalypse zombie, quelle membre du lobby vous prenez en duo et pourquoi ?
+Quel réseau social tu utilise le plus ?
+Tu es gerant d'une salle de torture, quelle video youtube mets tu a tes victime en boucle ?
+Quel est la chose la plus cher quue tu ais voler ?
+Quel est le pire plat que tu ais jamais manger ?
+Quel sera le prenom de ton premier gosse masculin ?
+Quelle punition pour un fils homosexuelle ?
+Ou sera tu dans 30 ans?
+Si je te teleporte pendant la seconde guerre mondial, quelle est ton role/grade dans les tranchées ?
+Si tu pouvais rendre quelque chose illegale, tu choisis quoi ?
+Si tu etais obliger de pratiquer le cohite avec un homme lequel choisis - tu ?
+En quelle theorie du complot crois- tu vraiment ?
