@@ -195,6 +195,36 @@ body::before {
   text-align: center;
 }
 
+.lobby-setting {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+}
+.lobby-setting label {
+  flex: 1;
+  font-size: 11px;
+  letter-spacing: .15em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.lobby-setting input[type=range] {
+  flex: 2;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.lobby-setting-val {
+  font-family: var(--display);
+  font-size: 22px;
+  color: var(--accent);
+  letter-spacing: .05em;
+  min-width: 36px;
+  text-align: right;
+}
+
 /* ─────────────────────────────────────────────
    GAME
 ───────────────────────────────────────────── */
@@ -624,18 +654,18 @@ body::before {
 <section id="screen-landing" class="screen active">
   <div class="landing-logo">
     <h1>INCOGNITO</h1>
-    <p>a social deduction party game</p>
+    <p>on va voir qui est qui</p>
   </div>
 
   <div class="landing-form">
-    <input id="input-username" type="text" maxlength="20" placeholder="your username" autocomplete="off"/>
+    <input id="input-username" type="text" maxlength="20" placeholder="mets ton pseudo sale folle" autocomplete="off"/>
 
-    <button class="btn btn-primary" onclick="createLobby()">CREATE LOBBY</button>
+    <button class="btn btn-primary" onclick="createLobby()">créer le lobby</button>
     <div class="divider">or</div>
-    <input id="input-code" type="text" maxlength="5" placeholder="lobby code" autocomplete="off"
+    <input id="input-code" type="text" maxlength="5" placeholder="code du lobby" autocomplete="off"
            style="text-transform:uppercase;letter-spacing:.3em;text-align:center"
            oninput="this.value=this.value.toUpperCase()"/>
-    <button class="btn btn-secondary" onclick="joinLobby()">JOIN LOBBY</button>
+    <button class="btn btn-secondary" onclick="joinLobby()">Rejoindre le lobby</button>
     <div class="error-msg" id="landing-error"></div>
   </div>
 </section>
@@ -643,9 +673,9 @@ body::before {
 <!-- ── LOBBY ──────────────────────────────────────────────────── -->
 <section id="screen-lobby" class="screen">
   <div class="lobby-header">
-    <h2>WAITING ROOM</h2>
+    <h2>Salle d'attente</h2>
     <div class="lobby-code-display">
-      lobby code
+      code du lobby
       <span id="lobby-code-display">—</span>
     </div>
   </div>
@@ -653,33 +683,39 @@ body::before {
   <div class="lobby-players" id="lobby-player-list"></div>
 
   <div style="display:flex;flex-direction:column;gap:10px;width:400px">
+    <div class="lobby-setting" id="setting-q-count" style="display:none">
+      <label>Questions par round</label>
+      <input type="range" min="5" max="40" value="30" step="5"
+             id="input-q-count" oninput="document.getElementById('val-q-count').textContent=this.value"/>
+      <span class="lobby-setting-val" id="val-q-count">30</span>
+    </div>
     <button class="btn btn-primary" id="btn-start" onclick="startGame()" style="display:none">
-      START GAME
+      Commencer le jeu omg
     </button>
-    <p class="lobby-hint" id="lobby-hint">Waiting for the game master to start…</p>
+    <p class="lobby-hint" id="lobby-hint">On attend que ça commence</p>
   </div>
 </section>
 
 <!-- ── GAME ──────────────────────────────────────────────────── -->
 <section id="screen-game" class="screen">
   <aside class="sidebar">
-    <div class="sidebar-title">PLAYERS</div>
+    <div class="sidebar-title">Joueurs</div>
     <div id="sidebar-player-list"></div>
   </aside>
 
   <div class="game-main">
     <div class="question-bar">
       <span class="question-num" id="q-num">Q 1/30</span>
-      <span class="question-text" id="q-text">Loading…</span>
-      <span class="answered-badge" id="answered-badge">ANSWERED ✓</span>
+      <span class="question-text" id="q-text">Chargement…</span>
+      <span class="answered-badge" id="answered-badge">A répondue ✓</span>
     </div>
 
     <div class="chat-log" id="chat-log"></div>
 
     <div class="chat-input-bar">
-      <input id="chat-input" type="text" placeholder="type your answer and press enter…"
+      <input id="chat-input" type="text" placeholder="ecrit ta reponse et appui sur entrer sale triso"
              maxlength="200" autocomplete="off" onkeydown="onChatKey(event)"/>
-      <button class="btn btn-primary" onclick="sendMessage()" style="font-size:14px;padding:10px 18px">SEND</button>
+      <button class="btn btn-primary" onclick="sendMessage()" style="font-size:14px;padding:10px 18px">Envoyer</button>
     </div>
   </div>
 </section>
@@ -687,43 +723,42 @@ body::before {
 <!-- ── MATCHING ──────────────────────────────────────────────────── -->
 <section id="screen-matching" class="screen">
   <div class="matching-header">
-    <h2>UNMASK THEM</h2>
-    <p>drag each username onto the fake identity you think it belongs to</p>
+    <h2>Demaskage</h2>
+    <p>Deplace chaque pseudo sur l'identité que tu penses etre la leurs</p>
   </div>
 
   <div class="matching-grid">
     <div class="matching-col">
-      <div class="matching-col-title">Fake Identities</div>
+      <div class="matching-col-title">Fausses idendité</div>
       <div id="identity-list"></div>
     </div>
     <div class="matching-col">
-      <div class="matching-col-title">Real Usernames</div>
+      <div class="matching-col-title">Vrais pseudo</div>
       <div id="username-list" style="display:flex;flex-direction:column;gap:8px"></div>
     </div>
   </div>
 
   <div class="matching-progress" id="matching-progress"></div>
   <button class="btn btn-primary" id="btn-submit-matching" onclick="submitMatching()" style="display:none">
-    SUBMIT GUESSES
-  </button>
+    Soumettre
 </section>
 
 <!-- ── RESULTS ──────────────────────────────────────────────────── -->
 <section id="screen-results" class="screen">
   <div class="results-header">
-    <h2>REVEALED</h2>
-    <p>the truth, finally</p>
+    <h2>Revelation !</h2>
+    <p>Enfin la verité si je peu me permettre/p>
   </div>
 
   <div class="reveal-grid" id="reveal-grid"></div>
 
   <div class="leaderboard">
-    <div class="lb-title">LEADERBOARD</div>
+    <div class="lb-title">Score</div>
     <div id="leaderboard-list"></div>
   </div>
 
   <button class="btn btn-primary" id="btn-play-again" style="display:none" onclick="playAgain()">
-    PLAY AGAIN
+    Rejouer
   </button>
 </section>
 
@@ -806,11 +841,14 @@ socket.on('lobby_state', (state) => {
 
   const btnStart = document.getElementById('btn-start');
   const hint = document.getElementById('lobby-hint');
+  const settingQCount = document.getElementById('setting-q-count');
   if (isMaster) {
     btnStart.style.display = 'block';
+    settingQCount.style.display = 'flex';
     hint.textContent = `${state.players.length} player${state.players.length !== 1 ? 's' : ''} in lobby — start when ready.`;
   } else {
     btnStart.style.display = 'none';
+    settingQCount.style.display = 'none';
     hint.textContent = 'Waiting for the game master to start…';
   }
 });
@@ -822,7 +860,8 @@ socket.on('you_are_master', () => {
 });
 
 function startGame() {
-  socket.emit('start_game', {}, (res) => {
+  const questionCount = parseInt(document.getElementById('input-q-count').value, 10);
+  socket.emit('start_game', { questionCount }, (res) => {
     if (res?.error) alert(res.error);
   });
 }

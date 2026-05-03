@@ -149,7 +149,7 @@ function broadcastQuestion(lobby) {
   io.to(lobby.code).emit("new_question", {
     text: currentQuestion(lobby),
     index: lobby.questionIndex,
-    total: 30,
+    total: lobby.questionCount,
   });
 
   // Reset answered flag
@@ -249,17 +249,17 @@ io.on("connection", (socket) => {
 
   // ── Join Lobby ─────────────────────────────────────────────────────────────
   socket.on("join_lobby", ({ username, code }, cb) => {
-    if (!username?.trim()) return cb({ error: "Username required" });
+    if (!username?.trim()) return cb({ error: "T'as besoins d'un pseudo sale golmon" });
     const lobby = lobbies.get(code?.toUpperCase());
-    if (!lobby) return cb({ error: "Lobby not found" });
-    if (lobby.phase !== "waiting") return cb({ error: "Game already started" });
+    if (!lobby) return cb({ error: "Lobby pas trouver" });
+    if (lobby.phase !== "waiting") return cb({ error: "La game a deja commencer bouffon" });
     if (lobby.players.size >= IDENTITIES.length)
-      return cb({ error: "Lobby is full" });
+      return cb({ error: "le lobby est complet bouhouhou" });
 
     const taken = [...lobby.players.values()].some(
       (p) => p.username.toLowerCase() === username.trim().toLowerCase()
     );
-    if (taken) return cb({ error: "Username already taken" });
+    if (taken) return cb({ error: "Pseudo deja pris sale triso" });
 
     /** @type {Player} */
     const player = {
@@ -282,19 +282,26 @@ io.on("connection", (socket) => {
   });
 
   // ── Start Game ─────────────────────────────────────────────────────────────
-  socket.on("start_game", (_, cb) => {
+  socket.on("start_game", ({ questionCount } = {}, cb) => {
     const player = findPlayer(socket.id);
     if (!player) return cb?.({ error: "Not in a lobby" });
     const lobby = lobbies.get(player.lobbyCode);
     if (!lobby) return cb?.({ error: "Lobby not found" });
-    if (lobby.masterId !== socket.id) return cb?.({ error: "Not master" });
-    if (lobby.players.size < 2) return cb?.({ error: "Need at least 2 players" });
+    if (lobby.masterId !== socket.id) return cb?.({ error: "t'es pas le boss" });
+    if (lobby.players.size < 2) return cb?.({ error: "Faut au moins 2 joueurs meme si c'est pas ouf" });
+
+    // Clamp questionCount to available questions, default 30
+    const count = Math.min(
+      Math.max(parseInt(questionCount, 10) || 30, 1),
+      QUESTIONS.length
+    );
 
     assignIdentities(lobby);
     lobby.phase = "playing";
     lobby.questionIndex = 0;
+    lobby.questionCount = count;
     lobby.chatLog = [];
-    lobby.questionOrder = shuffle([...Array(QUESTIONS.length).keys()]).slice(0, 30);
+    lobby.questionOrder = shuffle([...Array(QUESTIONS.length).keys()]).slice(0, count);
 
     // Tell each player their fake identity privately
     for (const p of lobby.players.values()) {
@@ -341,7 +348,7 @@ io.on("connection", (socket) => {
     // Check if all answered → advance
     if (allAnswered(lobby)) {
       lobby.questionIndex += 1;
-      if (lobby.questionIndex >= 30) {
+      if (lobby.questionIndex >= lobby.questionCount) {
         startMatchingPhase(lobby);
       } else {
         setTimeout(() => broadcastQuestion(lobby), 800);
@@ -418,7 +425,7 @@ io.on("connection", (socket) => {
     // If game was in progress and everyone answered except disconnected player, advance
     if (lobby.phase === "playing" && allAnswered(lobby)) {
       lobby.questionIndex += 1;
-      if (lobby.questionIndex >= 30) {
+      if (lobby.questionIndex >= lobby.questionCount) {
         startMatchingPhase(lobby);
       } else {
         broadcastQuestion(lobby);
