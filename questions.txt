@@ -1,4 +1,4 @@
-Do you prefer coffee or tea?
+Tu preferes le café ou les noirs ?
 What's your favourite season?
 Are you more of a morning person or a night owl?
 What's the last show you binge-watched?
@@ -38,3 +38,4 @@ Do you talk to yourself?
 What's a movie that made you cry?
 What's something you've never told anyone?
 Cats or dogs?
+

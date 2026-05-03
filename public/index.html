@@ -336,6 +336,45 @@ body::before {
   margin-bottom: 3px;
 }
 
+.chat-question-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 6px 0 2px;
+  animation: slideIn .25s ease;
+}
+.chat-question-divider::before,
+.chat-question-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.chat-question-divider-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  max-width: 70%;
+  text-align: center;
+}
+.chat-question-divider-num {
+  font-size: 9px;
+  letter-spacing: .25em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.chat-question-divider-text {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: .03em;
+  line-height: 1.4;
+}
+
 .chat-input-bar {
   border-top: 1px solid var(--border);
   padding: 16px 24px;
@@ -820,6 +859,23 @@ socket.on('new_question', ({ text, index, total }) => {
   document.getElementById('q-num').textContent = `Q ${index + 1}/${total}`;
   document.getElementById('q-text').textContent = text;
   document.getElementById('answered-badge').classList.remove('visible');
+
+  // Inject question as a persistent divider in the chat feed
+  const log = document.getElementById('chat-log');
+  const divider = document.createElement('div');
+  divider.className = 'chat-question-divider';
+  divider.innerHTML = `
+    <div class="chat-question-divider-inner">
+      <span class="chat-question-divider-num">Q ${index + 1} / ${total}</span>
+      <span class="chat-question-divider-text">${escapeHtml(text)}</span>
+    </div>
+  `;
+  log.appendChild(divider);
+  log.scrollTop = log.scrollHeight;
+
+  // Reset sidebar answered indicators
+  document.querySelectorAll('.sidebar-player').forEach(el => el.classList.remove('answered'));
+
   const input = document.getElementById('chat-input');
   input.disabled = false;
   input.value = '';
