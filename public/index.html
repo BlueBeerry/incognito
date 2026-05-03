@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>INCOGNITO</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0d0d0f;
+  --surface:   #141417;
+  --card:      #1a1a1f;
+  --border:    #2a2a32;
+  --accent:    #e8c547;
+  --accent2:   #e05a5a;
+  --text:      #e8e6e0;
+  --muted:     #6b6b78;
+  --success:   #5ae09a;
+  --radius:    6px;
+  --mono:      'DM Mono', monospace;
+  --display:   'Bebas Neue', sans-serif;
+}
+
+html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--mono); overflow: hidden; }
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 999; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: .4;
+}
+
+/* ── SCREENS ── */
+.screen { display: none; height: 100vh; width: 100vw; }
+.screen.active { display: flex; }
+
+/* ─────────────────────────────────────────────
+   LANDING
+───────────────────────────────────────────── */
+#screen-landing {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, #e8c54712 0%, transparent 70%),
+    var(--bg);
+}
+
+.landing-logo {
+  text-align: center;
+}
+.landing-logo h1 {
+  font-family: var(--display);
+  font-size: clamp(72px, 12vw, 140px);
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  line-height: 1;
+  text-shadow: 0 0 80px #e8c54740;
+}
+.landing-logo p {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+.landing-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 360px;
+}
+
+.landing-form input {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 14px;
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color .2s;
+  letter-spacing: .05em;
+}
+.landing-form input::placeholder { color: var(--muted); }
+.landing-form input:focus { border-color: var(--accent); }
+
+.btn {
+  font-family: var(--display);
+  font-size: 18px;
+  letter-spacing: .15em;
+  padding: 13px 24px;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: opacity .15s, transform .1s;
+}
+.btn:active { transform: scale(.97); }
+.btn:hover { opacity: .85; }
+
+.btn-primary { background: var(--accent); color: #0d0d0f; }
+.btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+.btn-danger { background: var(--accent2); color: #fff; }
+.btn-success { background: var(--success); color: #0d0d0f; }
+
+.divider {
+  display: flex; align-items: center; gap: 12px;
+  color: var(--muted); font-size: 10px; letter-spacing: .2em;
+}
+.divider::before, .divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+.error-msg {
+  color: var(--accent2);
+  font-size: 11px;
+  text-align: center;
+  min-height: 16px;
+  letter-spacing: .05em;
+}
+
+/* ─────────────────────────────────────────────
+   LOBBY
+───────────────────────────────────────────── */
+#screen-lobby {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  background: var(--bg);
+}
+
+.lobby-header { text-align: center; }
+.lobby-header h2 {
+  font-family: var(--display);
+  font-size: 48px;
+  letter-spacing: .1em;
+  color: var(--accent);
+}
+.lobby-code-display {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: .25em;
+}
+.lobby-code-display span {
+  color: var(--accent);
+  font-size: 24px;
+  letter-spacing: .4em;
+  display: block;
+  margin-top: 4px;
+}
+
+.lobby-players {
+  width: 400px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.lobby-player {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  font-size: 13px;
+  animation: slideIn .2s ease;
+}
+.lobby-player .crown { color: var(--accent); font-size: 14px; }
+.lobby-player .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  flex-shrink: 0;
+}
+
+.lobby-hint {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: .1em;
+  text-align: center;
+}
+
+/* ─────────────────────────────────────────────
+   GAME
+───────────────────────────────────────────── */
+#screen-game {
+  flex-direction: row;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* sidebar */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  overflow-y: auto;
+}
+.sidebar-title {
+  font-family: var(--display);
+  font-size: 20px;
+  letter-spacing: .15em;
+  color: var(--accent);
+  padding: 0 20px 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+.sidebar-player {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  transition: background .15s;
+}
+.sidebar-player:hover { background: var(--card); }
+.sidebar-player img {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  object-fit: cover;
+  background: var(--card);
+}
+.sidebar-player .p-name {
+  font-size: 12px;
+  letter-spacing: .05em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sidebar-player.me .p-name { color: var(--accent); }
+.sidebar-player.answered img { border-color: var(--success); }
+
+/* main chat area */
+.game-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.question-bar {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.question-num {
+  font-family: var(--display);
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: .1em;
+  white-space: nowrap;
+}
+.question-text {
+  font-size: 13px;
+  letter-spacing: .04em;
+  flex: 1;
+}
+.answered-badge {
+  font-size: 10px;
+  letter-spacing: .15em;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #5ae09a22;
+  color: var(--success);
+  border: 1px solid var(--success);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity .3s;
+}
+.answered-badge.visible { opacity: 1; }
+
+.chat-log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chat-msg {
+  display: flex;
+  gap: 10px;
+  animation: slideIn .2s ease;
+  max-width: 80%;
+}
+.chat-msg.mine {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+.chat-msg img {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+.chat-bubble {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px 12px 12px 12px;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.chat-msg.mine .chat-bubble {
+  background: #e8c54715;
+  border-color: #e8c54730;
+  border-radius: 12px 4px 12px 12px;
+}
+.chat-sender {
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: .1em;
+  margin-bottom: 3px;
+}
+
+.chat-input-bar {
+  border-top: 1px solid var(--border);
+  padding: 16px 24px;
+  display: flex;
+  gap: 12px;
+  background: var(--surface);
+}
+.chat-input-bar input {
+  flex: 1;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  outline: none;
+  letter-spacing: .04em;
+  transition: border-color .2s;
+}
+.chat-input-bar input::placeholder { color: var(--muted); }
+.chat-input-bar input:focus { border-color: var(--accent); }
+.chat-input-bar input:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ─────────────────────────────────────────────
+   MATCHING PHASE
+───────────────────────────────────────────── */
+#screen-matching {
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px;
+  gap: 28px;
+  overflow-y: auto;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, #e8c54708 0%, transparent 60%),
+    var(--bg);
+}
+
+.matching-header {
+  text-align: center;
+}
+.matching-header h2 {
+  font-family: var(--display);
+  font-size: 52px;
+  letter-spacing: .1em;
+  color: var(--accent);
+}
+.matching-header p {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: .15em;
+  margin-top: 6px;
+}
+
+.matching-grid {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;
+}
+
+.matching-col { display: flex; flex-direction: column; gap: 12px; min-width: 240px; }
+.matching-col-title {
+  font-size: 10px;
+  letter-spacing: .3em;
+  color: var(--muted);
+  text-transform: uppercase;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.identity-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.identity-card img {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+}
+.identity-card .id-name {
+  font-family: var(--display);
+  font-size: 20px;
+  letter-spacing: .08em;
+  color: var(--accent);
+}
+.identity-card .id-guess {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.username-chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  font-size: 13px;
+  cursor: grab;
+  letter-spacing: .05em;
+  transition: border-color .15s, background .15s;
+  user-select: none;
+}
+.username-chip:hover, .username-chip.dragging {
+  border-color: var(--accent);
+  background: #e8c54710;
+}
+.username-chip.used { opacity: .3; cursor: default; }
+
+.identity-card.drop-target { border-color: var(--accent); background: #e8c54710; }
+
+.matching-progress {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: .1em;
+  text-align: center;
+}
+
+/* ─────────────────────────────────────────────
+   RESULTS
+───────────────────────────────────────────── */
+#screen-results {
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px;
+  gap: 32px;
+  overflow-y: auto;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 100%, #5ae09a08 0%, transparent 60%),
+    var(--bg);
+}
+
+.results-header {
+  text-align: center;
+}
+.results-header h2 {
+  font-family: var(--display);
+  font-size: 60px;
+  letter-spacing: .12em;
+  color: var(--success);
+}
+.results-header p { color: var(--muted); font-size: 12px; letter-spacing: .15em; }
+
+.reveal-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  max-width: 800px;
+}
+
+.reveal-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+  animation: popIn .3s ease both;
+}
+.reveal-card img {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+}
+.reveal-card .rv-fake {
+  font-family: var(--display);
+  font-size: 18px;
+  letter-spacing: .08em;
+  color: var(--accent);
+}
+.reveal-card .rv-arrow { color: var(--muted); font-size: 12px; }
+.reveal-card .rv-real { font-size: 12px; letter-spacing: .08em; }
+.reveal-card.correct { border-color: var(--success); }
+.reveal-card.wrong { border-color: var(--accent2); }
+
+.leaderboard {
+  width: 100%;
+  max-width: 500px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.lb-title {
+  font-family: var(--display);
+  font-size: 18px;
+  letter-spacing: .15em;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  color: var(--accent);
+}
+.lb-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  animation: slideIn .2s ease both;
+}
+.lb-row:last-child { border-bottom: none; }
+.lb-rank {
+  font-family: var(--display);
+  font-size: 22px;
+  color: var(--muted);
+  width: 32px;
+}
+.lb-row:first-child .lb-rank { color: var(--accent); }
+.lb-name { flex: 1; font-size: 13px; letter-spacing: .05em; }
+.lb-pts {
+  font-family: var(--display);
+  font-size: 22px;
+  color: var(--success);
+  letter-spacing: .05em;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- ── LANDING ──────────────────────────────────────────────────── -->
+<section id="screen-landing" class="screen active">
+  <div class="landing-logo">
+    <h1>INCOGNITO</h1>
+    <p>a social deduction party game</p>
+  </div>
+
+  <div class="landing-form">
+    <input id="input-username" type="text" maxlength="20" placeholder="your username" autocomplete="off"/>
+
+    <button class="btn btn-primary" onclick="createLobby()">CREATE LOBBY</button>
+    <div class="divider">or</div>
+    <input id="input-code" type="text" maxlength="5" placeholder="lobby code" autocomplete="off"
+           style="text-transform:uppercase;letter-spacing:.3em;text-align:center"
+           oninput="this.value=this.value.toUpperCase()"/>
+    <button class="btn btn-secondary" onclick="joinLobby()">JOIN LOBBY</button>
+    <div class="error-msg" id="landing-error"></div>
+  </div>
+</section>
+
+<!-- ── LOBBY ──────────────────────────────────────────────────── -->
+<section id="screen-lobby" class="screen">
+  <div class="lobby-header">
+    <h2>WAITING ROOM</h2>
+    <div class="lobby-code-display">
+      lobby code
+      <span id="lobby-code-display">—</span>
+    </div>
+  </div>
+
+  <div class="lobby-players" id="lobby-player-list"></div>
+
+  <div style="display:flex;flex-direction:column;gap:10px;width:400px">
+    <button class="btn btn-primary" id="btn-start" onclick="startGame()" style="display:none">
+      START GAME
+    </button>
+    <p class="lobby-hint" id="lobby-hint">Waiting for the game master to start…</p>
+  </div>
+</section>
+
+<!-- ── GAME ──────────────────────────────────────────────────── -->
+<section id="screen-game" class="screen">
+  <aside class="sidebar">
+    <div class="sidebar-title">PLAYERS</div>
+    <div id="sidebar-player-list"></div>
+  </aside>
+
+  <div class="game-main">
+    <div class="question-bar">
+      <span class="question-num" id="q-num">Q 1/30</span>
+      <span class="question-text" id="q-text">Loading…</span>
+      <span class="answered-badge" id="answered-badge">ANSWERED ✓</span>
+    </div>
+
+    <div class="chat-log" id="chat-log"></div>
+
+    <div class="chat-input-bar">
+      <input id="chat-input" type="text" placeholder="type your answer and press enter…"
+             maxlength="200" autocomplete="off" onkeydown="onChatKey(event)"/>
+      <button class="btn btn-primary" onclick="sendMessage()" style="font-size:14px;padding:10px 18px">SEND</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── MATCHING ──────────────────────────────────────────────────── -->
+<section id="screen-matching" class="screen">
+  <div class="matching-header">
+    <h2>UNMASK THEM</h2>
+    <p>drag each username onto the fake identity you think it belongs to</p>
+  </div>
+
+  <div class="matching-grid">
+    <div class="matching-col">
+      <div class="matching-col-title">Fake Identities</div>
+      <div id="identity-list"></div>
+    </div>
+    <div class="matching-col">
+      <div class="matching-col-title">Real Usernames</div>
+      <div id="username-list" style="display:flex;flex-direction:column;gap:8px"></div>
+    </div>
+  </div>
+
+  <div class="matching-progress" id="matching-progress"></div>
+  <button class="btn btn-primary" id="btn-submit-matching" onclick="submitMatching()" style="display:none">
+    SUBMIT GUESSES
+  </button>
+</section>
+
+<!-- ── RESULTS ──────────────────────────────────────────────────── -->
+<section id="screen-results" class="screen">
+  <div class="results-header">
+    <h2>REVEALED</h2>
+    <p>the truth, finally</p>
+  </div>
+
+  <div class="reveal-grid" id="reveal-grid"></div>
+
+  <div class="leaderboard">
+    <div class="lb-title">LEADERBOARD</div>
+    <div id="leaderboard-list"></div>
+  </div>
+
+  <button class="btn btn-primary" id="btn-play-again" style="display:none" onclick="playAgain()">
+    PLAY AGAIN
+  </button>
+</section>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+// ─── State ────────────────────────────────────────────────────────────────────
+const socket = io();
+let myId        = socket.id;
+let myUsername  = '';
+let myLobbyCode = '';
+let myIdentity  = null;   // { name, avatar }
+let isMaster    = false;
+
+// matching state
+let matchingIdentities = [];  // [{ fakeName, avatar }]
+let matchingUsernames  = [];  // [string]
+let guesses            = {};  // { fakeName: username }
+let draggedUsername    = null;
+
+// ─── Screen Navigation ────────────────────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+}
+
+// ─── Landing ──────────────────────────────────────────────────────────────────
+function getUsername() {
+  return document.getElementById('input-username').value.trim();
+}
+function setError(msg) {
+  document.getElementById('landing-error').textContent = msg;
+}
+
+function createLobby() {
+  const username = getUsername();
+  if (!username) return setError('Enter a username first.');
+  myUsername = username;
+  socket.emit('create_lobby', { username }, (res) => {
+    if (res.error) return setError(res.error);
+    myLobbyCode = res.code;
+    isMaster = true;
+    showScreen('lobby');
+  });
+}
+
+function joinLobby() {
+  const username = getUsername();
+  const code = document.getElementById('input-code').value.trim().toUpperCase();
+  if (!username) return setError('Enter a username first.');
+  if (!code) return setError('Enter a lobby code.');
+  myUsername = username;
+  socket.emit('join_lobby', { username, code }, (res) => {
+    if (res.error) return setError(res.error);
+    myLobbyCode = res.code;
+    isMaster = false;
+    showScreen('lobby');
+  });
+}
+
+// ─── Lobby ────────────────────────────────────────────────────────────────────
+socket.on('lobby_state', (state) => {
+  myLobbyCode = state.code;
+  const isNowMaster = state.masterId === socket.id;
+  if (isNowMaster) isMaster = true;
+
+  document.getElementById('lobby-code-display').textContent = state.code;
+
+  const list = document.getElementById('lobby-player-list');
+  list.innerHTML = '';
+  state.players.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'lobby-player';
+    el.innerHTML = `
+      <div class="dot"></div>
+      ${p.isMaster ? '<span class="crown">♛</span>' : ''}
+      <span>${p.username}${p.id === socket.id ? ' <span style="color:var(--muted);font-size:10px">(you)</span>' : ''}</span>
+    `;
+    list.appendChild(el);
+  });
+
+  const btnStart = document.getElementById('btn-start');
+  const hint = document.getElementById('lobby-hint');
+  if (isMaster) {
+    btnStart.style.display = 'block';
+    hint.textContent = `${state.players.length} player${state.players.length !== 1 ? 's' : ''} in lobby — start when ready.`;
+  } else {
+    btnStart.style.display = 'none';
+    hint.textContent = 'Waiting for the game master to start…';
+  }
+});
+
+socket.on('you_are_master', () => {
+  isMaster = true;
+  document.getElementById('btn-start').style.display = 'block';
+  document.getElementById('lobby-hint').textContent = 'You are now the game master.';
+});
+
+function startGame() {
+  socket.emit('start_game', {}, (res) => {
+    if (res?.error) alert(res.error);
+  });
+}
+
+// ─── Game Start ───────────────────────────────────────────────────────────────
+socket.on('your_identity', (identity) => {
+  myIdentity = identity;
+});
+
+socket.on('game_started', ({ players }) => {
+  showScreen('game');
+  renderSidebar(players);
+  document.getElementById('chat-log').innerHTML = '';
+});
+
+function renderSidebar(players) {
+  const list = document.getElementById('sidebar-player-list');
+  list.innerHTML = '';
+  players.forEach(p => {
+    const isMe = p.id === socket.id;
+    const el = document.createElement('div');
+    el.className = 'sidebar-player' + (isMe ? ' me' : '');
+    el.id = 'sp-' + p.id;
+    el.innerHTML = `
+      <img src="${p.avatar}" alt="${p.fakeName}" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=default'"/>
+      <div class="p-name">${p.fakeName}${isMe ? ' ★' : ''}</div>
+    `;
+    list.appendChild(el);
+  });
+}
+
+// ─── Questions ────────────────────────────────────────────────────────────────
+socket.on('new_question', ({ text, index, total }) => {
+  document.getElementById('q-num').textContent = `Q ${index + 1}/${total}`;
+  document.getElementById('q-text').textContent = text;
+  document.getElementById('answered-badge').classList.remove('visible');
+  const input = document.getElementById('chat-input');
+  input.disabled = false;
+  input.value = '';
+  input.focus();
+});
+
+// ─── Chat ─────────────────────────────────────────────────────────────────────
+socket.on('chat_message', (msg) => {
+  const log = document.getElementById('chat-log');
+  const isMe = msg.id === socket.id;
+
+  const el = document.createElement('div');
+  el.className = 'chat-msg' + (isMe ? ' mine' : '');
+  el.innerHTML = `
+    <img src="${msg.avatar}" alt="${msg.pseudo}" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=default'"/>
+    <div>
+      <div class="chat-sender">${msg.pseudo}</div>
+      <div class="chat-bubble">${escapeHtml(msg.text)}</div>
+    </div>
+  `;
+  log.appendChild(el);
+  log.scrollTop = log.scrollHeight;
+
+  // Mark player as answered in sidebar
+  const sp = document.getElementById('sp-' + msg.id);
+  if (sp) sp.classList.add('answered');
+
+  if (isMe) {
+    document.getElementById('answered-badge').classList.add('visible');
+    document.getElementById('chat-input').disabled = true;
+  }
+});
+
+function onChatKey(e) {
+  if (e.key === 'Enter') sendMessage();
+}
+
+function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  socket.emit('send_message', { text });
+  input.value = '';
+}
+
+// ─── Matching Phase ───────────────────────────────────────────────────────────
+socket.on('matching_phase', ({ identities, usernames }) => {
+  matchingIdentities = identities;
+  matchingUsernames  = usernames;
+  guesses            = {};
+
+  showScreen('matching');
+  buildMatchingUI();
+});
+
+function buildMatchingUI() {
+  // Identities (drop targets)
+  const idList = document.getElementById('identity-list');
+  idList.innerHTML = '';
+  matchingIdentities.forEach(identity => {
+    const card = document.createElement('div');
+    card.className = 'identity-card';
+    card.dataset.fakeName = identity.fakeName;
+    card.innerHTML = `
+      <img src="${identity.avatar}" alt="${identity.fakeName}"/>
+      <div>
+        <div class="id-name">${identity.fakeName}</div>
+        <div class="id-guess" id="guess-${identity.fakeName}">— not assigned —</div>
+      </div>
+    `;
+    // drag-over events
+    card.addEventListener('dragover', e => { e.preventDefault(); card.classList.add('drop-target'); });
+    card.addEventListener('dragleave', () => card.classList.remove('drop-target'));
+    card.addEventListener('drop', e => {
+      e.preventDefault();
+      card.classList.remove('drop-target');
+      if (!draggedUsername) return;
+      assignGuess(identity.fakeName, draggedUsername);
+    });
+    idList.appendChild(card);
+  });
+
+  // Usernames (draggable chips)
+  const unList = document.getElementById('username-list');
+  unList.innerHTML = '';
+  matchingUsernames.forEach(username => {
+    const chip = document.createElement('div');
+    chip.className = 'username-chip';
+    chip.textContent = username;
+    chip.draggable = true;
+    chip.dataset.username = username;
+    chip.addEventListener('dragstart', () => {
+      draggedUsername = username;
+      chip.classList.add('dragging');
+    });
+    chip.addEventListener('dragend', () => {
+      draggedUsername = null;
+      chip.classList.remove('dragging');
+    });
+    // also allow click-to-select on mobile
+    chip.addEventListener('click', () => {
+      if (chip.classList.contains('used')) return;
+      document.querySelectorAll('.username-chip.selected').forEach(c => c.classList.remove('selected'));
+      chip.classList.toggle('selected');
+      if (chip.classList.contains('selected')) draggedUsername = username;
+      else draggedUsername = null;
+    });
+    unList.appendChild(chip);
+  });
+
+  // Click-to-assign on identity cards (mobile fallback)
+  document.querySelectorAll('.identity-card').forEach(card => {
+    card.addEventListener('click', () => {
+      if (draggedUsername) {
+        assignGuess(card.dataset.fakeName, draggedUsername);
+        draggedUsername = null;
+        document.querySelectorAll('.username-chip.selected').forEach(c => c.classList.remove('selected'));
+      }
+    });
+  });
+}
+
+function assignGuess(fakeName, username) {
+  // Unassign from previous if same username was elsewhere
+  for (const [fn, un] of Object.entries(guesses)) {
+    if (un === username) {
+      delete guesses[fn];
+      const el = document.getElementById('guess-' + fn);
+      if (el) el.textContent = '— not assigned —';
+      // un-used the chip
+      const chip = document.querySelector(`.username-chip[data-username="${username}"]`);
+      if (chip) chip.classList.remove('used');
+    }
+  }
+
+  guesses[fakeName] = username;
+  const el = document.getElementById('guess-' + fakeName);
+  if (el) { el.textContent = username; el.style.color = 'var(--accent)'; }
+
+  // Mark chip as used
+  const chip = document.querySelector(`.username-chip[data-username="${username}"]`);
+  if (chip) { chip.classList.add('used'); chip.classList.remove('selected'); }
+
+  // Show submit button if all assigned
+  const submitBtn = document.getElementById('btn-submit-matching');
+  if (Object.keys(guesses).length === matchingIdentities.length) {
+    submitBtn.style.display = 'block';
+  }
+}
+
+socket.on('matching_progress', ({ submitted, total }) => {
+  document.getElementById('matching-progress').textContent =
+    `${submitted} / ${total} players have submitted`;
+});
+
+function submitMatching() {
+  socket.emit('submit_matching', { guesses });
+  document.getElementById('btn-submit-matching').style.display = 'none';
+  document.getElementById('matching-progress').textContent = 'Waiting for other players…';
+}
+
+// ─── Results ──────────────────────────────────────────────────────────────────
+socket.on('results', ({ truth, leaderboard, identities }) => {
+  showScreen('results');
+
+  // Reveal cards
+  const grid = document.getElementById('reveal-grid');
+  grid.innerHTML = '';
+  identities.forEach((item, i) => {
+    const myGuess = guesses[item.fakeName];
+    const correct = myGuess === item.username;
+    const card = document.createElement('div');
+    card.className = 'reveal-card' + (myGuess ? (correct ? ' correct' : ' wrong') : '');
+    card.style.animationDelay = (i * 0.07) + 's';
+    card.innerHTML = `
+      <img src="${item.avatar}" alt="${item.fakeName}"/>
+      <div class="rv-fake">${item.fakeName}</div>
+      <div class="rv-arrow">▼</div>
+      <div class="rv-real">${item.username}</div>
+    `;
+    grid.appendChild(card);
+  });
+
+  // Leaderboard
+  const lb = document.getElementById('leaderboard-list');
+  lb.innerHTML = '';
+  leaderboard.forEach((entry, i) => {
+    const row = document.createElement('div');
+    row.className = 'lb-row';
+    row.style.animationDelay = (i * 0.06) + 's';
+    row.innerHTML = `
+      <div class="lb-rank">${i + 1}</div>
+      <div class="lb-name">${entry.username}${entry.username === myUsername ? ' <span style="color:var(--muted);font-size:10px">(you)</span>' : ''}</div>
+      <div class="lb-pts">${entry.points}</div>
+    `;
+    lb.appendChild(row);
+  });
+
+  if (isMaster) {
+    document.getElementById('btn-play-again').style.display = 'block';
+  }
+});
+
+socket.on('reset_to_lobby', () => {
+  myIdentity = null;
+  guesses    = {};
+  showScreen('lobby');
+});
+
+function playAgain() {
+  socket.emit('play_again');
+}
+
+// ─── Util ─────────────────────────────────────────────────────────────────────
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// Track socket id after connect
+socket.on('connect', () => { myId = socket.id; });
+</script>
+</body>
+</html>
