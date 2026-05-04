@@ -75,6 +75,23 @@ const IDENTITIES = [
   { name: "Sigma Ronaldo",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500607248248864899/images_6.jpeg?ex=69f90ce7&is=69f7bb67&hm=22eab3678bc814a46a9d42e61c75cc9225234f7ea5b9407365a4687f1a3162e9&"    },
   { name: "Mloukhia",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500607634699583609/grossiste-amilcar-mloukhia-tunisie_MLO2K350.png?ex=69f90d44&is=69f7bbc4&hm=62b331e0ade94477cabe25bb25cf1c9b262cee99b492f256bca4e29feaa2715e&"   },
   { name: "LSD",      avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500608184518312076/Screenshot_20260113_074313_TikTok.jpg?ex=69f90dc7&is=69f7bc47&hm=ab045a0a5cffc3dc432e1da5db0db014c0312f038e67585d151101923ca95dbb&"   },
+
+  { name: "Freakbob",   avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500930182624579614/artworks-zrrfeImrXlC7KVfZ-fybnBg-t1080x1080.png?ex=69fa39a9&is=69f8e829&hm=d02b20976284c9086f88ba292d8fd1e33d7a6667c88a53499dab423d640c97ba&"   },
+  { name: "Monsieur Patate",  avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500935739259752519/Mpatate.png?ex=69fa3ed6&is=69f8ed56&hm=339fb3096f4eeb0b16fd7fea48015fbe40aff2dbfca19c24c565a13ec882e219&"       },
+  { name: "Un Kilo De Blague De Jean Marie Bigard",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500935925889372240/81u56dPrKsL._AC_UF10001000_QL80_.png?ex=69fa3f02&is=69f8ed82&hm=6c4c8ee26f3b094c83c50f5a8daafcd85ef1c2de785b9df7a2124fa399135bb7&"    },
+  { name: "Void Grub",  avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500936147210076200/latest.png?ex=69fa3f37&is=69f8edb7&hm=71354b76a33fa65e24706ac7f1387e63a12ec5829cd448ec7e398c7701e54348&"  },
+  { name: "Siphano",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500936326667571300/250.png?ex=69fa3f62&is=69f8ede2&hm=ac0ec9298f261ae34796cfaa453538e69883857db063e64796fe1cb70da2be69&"    },
+  { name: "Fluffy (Le Clebard De Bastient)",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500937387772088481/607075588_17843660739666099_1274751738004987700_n.jpg?ex=69fa405f&is=69f8eedf&hm=6beb4ce266ea8264ed9c58999b63d433a4847d4fee65b0809dbde5c3cb2e3271&"    },
+  { name: "Chouffin",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500939156799492136/chouffin_chapeau.png?ex=69fa4205&is=69f8f085&hm=d5d04023a6e8ec82e3fc99d894c45c055fdba34ab0c5976eea0177b780da1b93&"   },
+  { name: "Joel",      avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500939360025968804/latest.png?ex=69fa4235&is=69f8f0b5&hm=b352595f874bf28ac07a4c157b5cc200a1ecf3a3c52a6e83cbe7a123ac9d09a7&"   },
+
+  { name: "Poulet Miam",   avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500939739333918741/34rs4ucrdvge1.png?ex=69fa428f&is=69f8f10f&hm=350ad2895b1b2ac2781207498550f8d789a98ffa8ade422dde9fa09b263ae65f&"   },
+  { name: "Steve",  avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500940008050135240/dPZQvFRbjEq3XCg37rBgWo.png?ex=69fa42d0&is=69f8f150&hm=28ec0898eda7b0c6e8644dc6e0b25b0e3c07d65c8ea803335a8d7c3b63675895&"       },
+  { name: "Asuna",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500940121850253352/latest.png?ex=69fa42eb&is=69f8f16b&hm=48dd2dab898dd3cd74ee2331748e650b481acb04a8ce82cc0e3060401d8d3a82&"    },
+  { name: "OmniMan Whatsapp",  avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500940494501318738/ec5cd195d7c0da0176fdd508369b2c3d.png?ex=69fa4344&is=69f8f1c4&hm=5ee33dca534337d9f4e263038b7428c8c0f6ba4a76ce7c3650cb717373aa9022&"  },
+  { name: "Gordo",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500940973843415111/Gordo_KSSU_artwork.png?ex=69fa43b6&is=69f8f236&hm=0e811d7cf85783481d5c3b1edb1407bef5d22c7ffa95c294e0e0eafa8e7f307c&"    },
+  { name: "Igor Boggdanov",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500941923806875758/250px-Salon_du_livre_de_Paris_2011_-_Igor_Bogdanov_-_004.png?ex=69fa4498&is=69f8f318&hm=eb0ab3361c4d0f05e9abc3ea381b5b1c1f8ae0a018a98302ebb7efc380eba690&"    },
+  { name: "Rhum de monsieur Pacoud",    avatar: "https://cdn.discordapp.com/attachments/1011964154875224135/1500943138951397376/03267130032470-z1r1-s01.png?ex=69fa45ba&is=69f8f43a&hm=b7f3b9f62c4210fd6cca13dbaed6e9f1b99c62b8e18dc4e07519d7da63d13168&"   },
 ];
 
 // ─── State ───────────────────────────────────────────────────────────────────
