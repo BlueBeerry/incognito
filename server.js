@@ -469,6 +469,7 @@ function findPlayer(socketId) {
 
 // ─── Static Files ─────────────────────────────────────────────────────────────
 app.use(express.static(path.join(__dirname, "public")));
+app.use('/Avatars', express.static(path.join(__dirname, 'Avatars')));
 app.get("*", (_req, res) =>
   res.sendFile(path.join(__dirname, "public", "index.html"))
 );
