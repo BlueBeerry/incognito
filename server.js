@@ -56,42 +56,42 @@ if (fs.existsSync(questionsFile)) {
 
 // ─── Identities ─────────────────────────────────────────────────────────────
 const IDENTITIES = [
-  { name: "Hérvé",     avatar: "https://https://incognito-83bj.onrender.com/Avatars/Herve.jpg"   },
-  { name: "Marzouka",  avatar: "https://https://incognito-83bj.onrender.com/Avatars/Marzouka.png"       },
-  { name: "Bassem",    avatar: "https://https://incognito-83bj.onrender.com/Avatars/Bassem.png"    },
-  { name: "Asterion",  avatar: "https://https://incognito-83bj.onrender.com/Avatars/Asterion.png"  },
-  { name: "Mobutu",    avatar: "https://https://incognito-83bj.onrender.com/Avatars/Mobutu.png"    },
-  { name: "IbraTV",    avatar: "https://https://incognito-83bj.onrender.com/Avatars/Ibra.png"    },
-  { name: "Yassin",    avatar: "https://https://incognito-83bj.onrender.com/Avatars/Yassin.png"   },
-  { name: "Dano",      avatar: "https://https://incognito-83bj.onrender.com/Avatars/Dano.png"   },
-  { name: "Walter",    avatar: "https://https://incognito-83bj.onrender.com/Avatars/Walter.jpg"   },
-  { name: "KebabMan",  avatar: "https://https://incognito-83bj.onrender.com/Avatars/Kebab.jpg"    },
+  { name: "Hérvé",     avatar: "/Avatars/Herve.jpg"   },
+  { name: "Marzouka",  avatar: "/Avatars/Marzouka.png"       },
+  { name: "Bassem",    avatar: "/Avatars/Bassem.png"    },
+  { name: "Asterion",  avatar: "/Avatars/Asterion.png"  },
+  { name: "Mobutu",    avatar: "/Avatars/Mobutu.png"    },
+  { name: "IbraTV",    avatar: "/Avatars/Ibra.png"    },
+  { name: "Yassin",    avatar: "/Avatars/Yassin.png"   },
+  { name: "Dano",      avatar: "/Avatars/Dano.png"   },
+  { name: "Walter",    avatar: "/Avatars/Walter.jpg"   },
+  { name: "KebabMan",  avatar: "/Avatars/Kebab.jpg"    },
 
-  { name: "Mustapha Atatürk",   avatar: "https://https://incognito-83bj.onrender.com/Avatars/Mustapha.png"   },
-  { name: "Kratos Messi",  avatar: "https://https://incognito-83bj.onrender.com/Avatars/Kratos.png"       },
-  { name: "Sale Juif",    avatar: "https://https://incognito-83bj.onrender.com/Avatars/Gad.png"    },
-  { name: "René la taupe",  avatar: "https://https://incognito-83bj.onrender.com/Avatars/Rene.png"  },
-  { name: "Jorblin Jeapnis",    avatar: "https://https://incognito-83bj.onrender.com/Avatars/Jorplin.png"    },
-  { name: "Sigma Ronaldo",    avatar: "https://https://incognito-83bj.onrender.com/Avatars/Ronaldo.jpeg"    },
-  { name: "Mloukhia",    avatar: "https://https://incognito-83bj.onrender.com/Avatars/Mloukhia.png"   },
-  { name: "LSD",      avatar: "https://https://incognito-83bj.onrender.com/Avatars/LSD.jpg"   },
+  { name: "Mustapha Atatürk",   avatar: "/Avatars/Mustapha.png"   },
+  { name: "Kratos Messi",  avatar: "/Avatars/Kratos.png"       },
+  { name: "Sale Juif",    avatar: "/Avatars/Gad.png"    },
+  { name: "René la taupe",  avatar: "/Avatars/Rene.png"  },
+  { name: "Jorblin Jeapnis",    avatar: "/Avatars/Jorplin.png"    },
+  { name: "Sigma Ronaldo",    avatar: "/Avatars/Ronaldo.jpeg"    },
+  { name: "Mloukhia",    avatar: "/Avatars/Mloukhia.png"   },
+  { name: "LSD",      avatar: "/Avatars/LSD.jpg"   },
 
-  { name: "Freakbob",   avatar: "https://https://incognito-83bj.onrender.com/Avatars/Bob.png"   },
-  { name: "Monsieur Patate",  avatar: "https://https://incognito-83bj.onrender.com/Avatars/Mpatate.png"       },
-  { name: "Un Kilo De Blague De Jean Marie Bigard",    avatar: "https://https://incognito-83bj.onrender.com/Avatars/KiloBlague.png"    },
-  { name: "Void Grub",  avatar: "https://https://incognito-83bj.onrender.com/Avatars/VoidGrub.png"  },
-  { name: "Siphano",    avatar: "https://https://incognito-83bj.onrender.com/Avatars/Siphano.png"    },
-  { name: "Fluffy (Le Clebard De Bastient)",    avatar: "https://https://incognito-83bj.onrender.com/Avatars/Fluffy.jpg"    },
-  { name: "Chouffin",    avatar: "https://https://incognito-83bj.onrender.com/Avatars/Chouffin.png"   },
-  { name: "Joel",      avatar: "https://https://incognito-83bj.onrender.com/Avatars/Joel.png"   },
+  { name: "Freakbob",   avatar: "/Avatars/Bob.png"   },
+  { name: "Monsieur Patate",  avatar: "/Avatars/Mpatate.png"       },
+  { name: "Un Kilo De Blague De Jean Marie Bigard",    avatar: "/Avatars/KiloBlague.png"    },
+  { name: "Void Grub",  avatar: "/Avatars/VoidGrub.png"  },
+  { name: "Siphano",    avatar: "/Avatars/Siphano.png"    },
+  { name: "Fluffy (Le Clebard De Bastient)",    avatar: "/Avatars/Fluffy.jpg"    },
+  { name: "Chouffin",    avatar: "/Avatars/Chouffin.png"   },
+  { name: "Joel",      avatar: "/Avatars/Joel.png"   },
 
-  { name: "Poulet Miam",   avatar: "https://https://incognito-83bj.onrender.com/Avatars/Poulet.png"   },
-  { name: "Steve",  avatar: "https://https://incognito-83bj.onrender.com/Avatars/Steve.png"       },
-  { name: "Asuna",    avatar: "https://https://incognito-83bj.onrender.com/Avatars/Asuna.png"    },
-  { name: "OmniMan Whatsapp",  avatar: "https://https://incognito-83bj.onrender.com/Avatars/OmniMan.png"  },
-  { name: "Gordo",    avatar: "https://https://incognito-83bj.onrender.com/Avatars/Gordo.png"    },
-  { name: "Igor Bogdanov",    avatar: "https://https://incognito-83bj.onrender.com/Avatars/Bogdanov.png"    },
-  { name: "Rhum de monsieur Pacoud",    avatar: "https://https://incognito-83bj.onrender.com/Avatars/Rhum.png"   },
+  { name: "Poulet Miam",   avatar: "/Avatars/Poulet.png"   },
+  { name: "Steve",  avatar: "/Avatars/Steve.png"       },
+  { name: "Asuna",    avatar: "/Avatars/Asuna.png"    },
+  { name: "OmniMan Whatsapp",  avatar: "/Avatars/OmniMan.png"  },
+  { name: "Gordo",    avatar: "/Avatars/Gordo.png"    },
+  { name: "Igor Bogdanov",    avatar: "/Avatars/Bogdanov.png"    },
+  { name: "Rhum de monsieur Pacoud",    avatar: "/Avatars/Rhum.png"   },
 ];
 
 // ─── State ───────────────────────────────────────────────────────────────────
@@ -469,7 +469,6 @@ function findPlayer(socketId) {
 
 // ─── Static Files ─────────────────────────────────────────────────────────────
 app.use(express.static(path.join(__dirname, "public")));
-app.use('/Avatars', express.static(path.join(__dirname, 'Avatars')));
 app.get("*", (_req, res) =>
   res.sendFile(path.join(__dirname, "public", "index.html"))
 );
